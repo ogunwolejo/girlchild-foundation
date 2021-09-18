@@ -1,0 +1,14 @@
+<div class="row">
+    {{#if isError}}
+    <!-- alert component -->
+    <div class="" style="width: 100%;">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p style="letter-spacing: 3px; word-spacing: 2px; font-size:20px; text-transform: uppercase;" class="offset-lg-4 col-lg-6">{{errorMessage}}</p> 
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    </div>
+    {{/if}}
+</div>

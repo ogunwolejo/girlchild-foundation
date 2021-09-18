@@ -1,0 +1,52 @@
+<main id="main">
+
+
+    <div class="d-flex justify-content-center align-items-center mb-5">
+        <section style="width:100%">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-xl-7">
+                        <div class="p-0 mb-2 card border-0">
+                            <img src="{{user.imageFile}}" style="height:500px; max-height:600px;" class="card-img-top" />
+                        </div>
+
+                    </div>
+
+
+                    <section id="contact" class="col-xl-5 contact p-0 bg-light">
+                        <div class="card border-0 p-2 h-100 ">
+                            <div class="card-body">
+                                <div class="d-flex flex-row justify-content-between ">
+                                    <h5 class="card-title align-self-center" style="text-transform:uppercase; color:#009961; font-weight:800">{{user.fullname}}</h5>
+
+                                    <div class="border border-1 card-shadow-5">
+                                        <h5 class="text-black p-2" style="color:#009961">{{user.amount}}</h5>
+                                    </div>
+                                </div>
+
+                                <p class="" style="color:gray; font-weight:800">{{user.mobileNumber}}</p>
+
+                                <div class="card-text d-flex row justify-content-center">
+                                    <div class="p-3" style="font-weight:400; font-size:16px">
+                                        {{user.content}}
+                                    </div>
+                                </div>
+
+                                <div class="offset-lg-3 offset-xl-3 offset-md-2 offset-sm-2 mt-5">
+                                    <a href="https://paystack.com/pay/dd-form" class="btn btn-lg btn-outline-success" style="text-transform:uppercase; font-weight:600">You Can Help In Meeting A Need</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+
+
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+
+</main>
