@@ -1,94 +1,125 @@
 <div id="content">
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
 
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary align-self-center">Donees</h6>
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-3 my-2 my-md-0 mw-100 navbar-search" action="#" method="post">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for ..."
-                               aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row justify-content-between">
+        <h6
+          class="m-0 font-weight-bold text-primary align-self-center"
+        >Donees</h6>
+        <!-- Topbar Search -->
+        <!--form
+          class="d-none d-sm-inline-block form-inline mr-auto ml-3 my-2 my-md-0 mw-100 navbar-search"
+          action="/admin/donee-tables/search"
+          method="GET"
+        >
+          <div class="input-group">
+            <input
+              type="text"
+              name="search_data"
+              class="form-control bg-light border-0 small"
+              placeholder="Search for ..."
+              aria-label="Search"
+              aria-describedby="basic-addon2"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="button">
+                <i class="fas fa-search fa-sm"></i>
+              </button>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Fullname</th>
-                                <th>Email Address</th>
-                                <th>Contact</th>
-                                <th>Amount Needed</th>
-                                <th>Name Of Bank</th>
-                                <th>Account Number</th>
-                                <th>Home Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{#each data}}
-                            <tr>
-                                <td>{{fullname}}</td>
-                                <td>{{email}}</td>
-                                <td>{{mobileNumber}}</td>
-                                <td>{{amount}}</td>
-                                <td>{{bank}}</td>
-                                <td>{{accountNumber}}</td>
-                                <td>{{address}}</td>
-                            </tr>
-                            {{/each}}
+          </div>
+        </form-->
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table
+            class="table table-bordered"
+            id="dataTable"
+            width="100%"
+            cellspacing="0"
+          >
+            <thead>
+              <tr>
+                <th>Fullname</th>
+                <th>Email Address</th>
+                <th>Contact</th>
+                <th>Amount Needed</th>
+                <th>Name Of Bank</th>
+                <th>Account Number</th>
+                <th>Home Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each data}}
+                <tr>
+                  <td>{{fullname}}</td>
+                  <td>{{email}}</td>
+                  <td>{{mobileNumber}}</td>
+                  <td>{{amount}}</td>
+                  <td>{{bank}}</td>
+                  <td>{{accountNumber}}</td>
+                  <td>{{address}}</td>
+                </tr>
+              {{/each}}
+
+            </tbody>
+          </table>
         </div>
-
+      </div>
     </div>
 
-    <div class="pagination my-3 d-flex justify-content-center">
-        <ul class="justify-content-center">
-            {{#if show_previous_arrow}}
-            <li><a href="/admin/donee-tables?page={{previous_page}}"><i class="fas fa-chevron-left"></i></a></li>
-            {{/if}}
+  </div>
 
-            {{#if show_previous_page}}
-            <li><a href="/admin/donee-tables?page={{previous_page}}">{{previous_page}}</a></li>
-            {{/if}}
+  <div class="pagination my-3 d-flex justify-content-center">
+    <ul class="justify-content-center">
+      {{#if show_previous_arrow}}
+        <li><a href="/admin/donee-tables?page={{previous_page}}"><i
+              class="fas fa-chevron-left"
+            ></i></a></li>
+      {{/if}}
 
-            <li class="active"><a href="/admin/donee-tables?page={{current_page}}">{{current_page}}</a></li>
+      {{#if show_previous_page}}
+        <li><a
+            href="/admin/donee-tables?page={{previous_page}}"
+          >{{previous_page}}</a></li>
+      {{/if}}
 
-            {{#if is_there_next_page}}
-            <li class="text-black"><a href="/admin/donee-tables?page={{next_page}}">{{next_page}}</a></li>
-            {{/if}}
+      <li class="active"><a
+          href="/admin/donee-tables?page={{current_page}}"
+        >{{current_page}}</a></li>
 
-            {{#if show_last_page}}
-            <li><a href="/admin/donee-tables?page={{total_page}}" style="font-weight:800">{{total_page}}</a></li>
+      {{#if is_there_next_page}}
+        <li class="text-black"><a
+            href="/admin/donee-tables?page={{next_page}}"
+          >{{next_page}}</a></li>
+      {{/if}}
 
-            {{/if}}
+      {{#if show_last_page}}
+        <li><a
+            href="/admin/donee-tables?page={{total_page}}"
+            style="font-weight:800"
+          >{{total_page}}</a></li>
 
-            {{#if show_next_arrow}}
-            <li><a href="/admin/donee-tables?page={{next_page}}"><i class="fas fa-chevron-right"></i> </a></li>
-            {{/if}}
+      {{/if}}
 
-        </ul>
-    </div>
+      {{#if show_next_arrow}}
+        <li><a href="/admin/donee-tables?page={{next_page}}"><i
+              class="fas fa-chevron-right"
+            ></i>
+          </a></li>
+      {{/if}}
+
+    </ul>
+  </div>
 
 </div>
 
 <!--jquery script-->
 <script src="/js/jquery-3.5.1.js"></script>
 <script>
-   
+
 </script>

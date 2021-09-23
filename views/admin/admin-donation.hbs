@@ -3,7 +3,7 @@
 
   <!-- Page Heading -->
   <h1 class="h3 mb-4 text-gray-800">Donations</h1>
-  <!---the donne form -->
+  <!----->
   <div class="container">
     <form
       action="/admin/create-donee-data"
@@ -130,21 +130,6 @@
                     ></textarea>
                   </div>
 
-                  <!-- the donee problem -->
-                  <div class="mb-3 form-group">
-                    <select
-                      class="h-50 form-control-lg form-select form-select-lg border"
-                      aria-label="Default select example"
-                      name="d-category"
-                      required
-                    >
-                      <option selected>Select Category </option>
-                      <option value="0">Medical</option>
-                      <option value="1">Educational</option>
-
-                    </select>
-                  </div>
-
                   <div class="form-group mb-3">
                     <input
                       class="form-control form-control-file rounded-pill"
@@ -201,7 +186,8 @@
 
     <div class="row" id="donee">
       {{#each list}}
-        <div id="donee-card" class="col-lg-6 col-xl-4 col-md-12 col-sm-12 mb-2">
+        <div id="donee-id" class="col-lg-6 col-xl-4 col-md-12 col-sm-12 mb-2">
+          <!--div class="hide" style="display: none;">{{id}}</div-->
           <div class="p-0 card bg-white border-0">
             <img
               src="{{imageFile}}"
@@ -235,12 +221,7 @@
                 </div>
               </div>
 
-              <div class="p-3">
-                <div
-                  class="btn btn-lg btn-outline-primary d-block"
-                  id="btn-delete"
-                >DELETE</div>
-              </div>
+              
             </div>
 
           </div>
@@ -263,13 +244,22 @@
 <!--jquery script-->
 <script src="/js/jquery-3.5.1.js"></script>
 
-<script>
-  const deleteUrl = "/admin/delete-donee-data"; $(document).ready(function () {
-  //$("#btn-delete").click(function (e) { // e.preventDefault(); //
-  console.log(this.parentElement); // let donne_details = { // fullname:
-  $(".card-title").text(), // phone: $("#phone").text(), // content:
-  $("#content").text(), // }; // $.ajax({ // type: "POST", // url: deleteUrl, //
-  data: { data: donne_details }, // success: function (data) { //
-  console.log(data); // //$("#ajax-message") // }, // error: function (error) {
-  // alert("failure " + error); // } // }); //}); })
-</script>
+<!--script>
+  $(document).ready(function(){
+    const deleteUrl = "/admin/delete-donee-data"; const _id = $(".hide").text();
+
+    $("#btn-delete").click(function(e) {
+      var i = console.log($("#donee##btn-delete");
+      console.log(i);
+    });
+
+  })
+
+  
+  /** when the delete button is clicked **/
+
+  /*$("#btn-delete").click(function(e) {
+  e.preventDefault(); $.ajax({ type: "POST", url:deleteUrl, data: _id, success:
+  function(success_message) { console.log(success_message); }, error:
+  function(error_message) { console.log("failure", error_message); } }) }) */
+</script-->

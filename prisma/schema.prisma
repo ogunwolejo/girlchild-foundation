@@ -24,19 +24,19 @@ model admin {
 }
 
 model donee {
-  id            String      @id @default(uuid()) @db.Uuid
-  fullname      String
-  email         String?     @unique @db.VarChar(255)
-  mobileNumber  String      @unique
-  address       String?     @db.VarChar(1000)
-  content       String
-  amount        Decimal
-  category      Category?   @default(ALL)
-  accountNumber String
-  bank          String
-  createdAt     DateTime    @default(now())
-  imageFile     Json
-  donations     donations[]
+  id               String      @id @default(uuid()) @db.Uuid
+  fullname         String
+  email            String?     @unique @db.VarChar(255)
+  mobileNumber     String      @unique
+  address          String?     @db.VarChar(1000)
+  content          String
+  amount           Decimal
+  accountNumber    String
+  bank             String
+  Solution_provide Boolean     @default(false)
+  createdAt        DateTime    @default(now())
+  imageFile        Json
+  donations        donations[]
 }
 
 model donations {
@@ -47,8 +47,4 @@ model donations {
   donatedTo donee    @relation(fields: [doneeId], references: [id])
 }
 
-enum Category {
-  EDUCATIONAL
-  MEDICAL
-  ALL
-}
+

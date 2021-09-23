@@ -73,60 +73,11 @@ exports.login_admin = async (email, password) => {
         email: _admin.email,
       };
     } else {
-      console.log("Incorrect password");
-      return Promise.reject("Incorrect password");
+      console.log("Incorrect password".toUpperCase());
+      return Promise.reject("Incorrect password".toUpperCase());
     }
   } catch (err) {
     return err;
-  } finally {
-    prisma.$disconnect();
-  }
-};
-
-// FUNCTION FOR ADMINS TO CREATE THE PROFILE OF PEOPLE THAT NEED SOLUTIONS TO THEIR PROBLEMS
-/**
- *
- * @param {fullname for profile of the problem} _fullname
- * @param {email for profile of the problem} _email
- * @param {phone contact for profile of the problem} _telephone
- * @param {person address} _address
- * @param {the problem the indivdual is facing} _doneeContent
- * @param {the amount the person is requesting for to solve their problem} _amountNeeded
- * @param { the person account number } _accountNum
- * @param {the name of the person bank } _bankName
- * @param { the picture of the person } image
- * @returns
- */
-exports.create_problem_need_donation = async (
-  _fullname,
-  _email,
-  _telephone,
-  _address,
-  _doneeContent,
-  _amountNeeded,
-  _accountNum,
-  _bankName,
-  _image
-) => {
-  try {
-    await prisma.donee.create({
-      data: {
-        fullname: _fullname,
-        email: _email,
-        mobileNumber: _telephone,
-        address: _address,
-        content: _doneeContent,
-        amount: new Prisma.Decimal(_amountNeeded),
-        accountNumber: _accountNum,
-        bank: _bankName,
-        imageFile: { path: JSON.stringify(_image) },
-      },
-    });
-    console.log("The Problem Profile was created");
-    return Promise.resolve("The Problem Profile was created");
-  } catch (e) {
-    console.log("The Problem Profile was not created");
-    return Promise.reject("The Problem Profile was not created");
   } finally {
     prisma.$disconnect();
   }

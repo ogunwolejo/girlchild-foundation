@@ -4,12 +4,14 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
+const flash = require("connect-flash");
 const expressSession = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
 
 const main_route = require("./routes/main/main_router");
 const admin_route = require("./routes/admin/admin_router");
+const payment_route = require("./routes/payment/payment");
 
 // intialization of the system
 const app = express();
@@ -42,8 +44,12 @@ app.use(
   })
 );
 
+// flash messages
+app.use(flash());
+
 // configurations of the static folders
 app.use(express.static(join(__dirname, "public")));
+app.use(express.static(join(__dirname, "uploads")));
 
 // configurations of the express handlebars
 const hbs = exphbs.create({
@@ -63,9 +69,11 @@ if (process.env.NODE_ENV === "production") {
 // routes list
 app.use(main_route);
 app.use("/admin", admin_route);
+app.use("/payments", payment_route);
 
 const PORT = process.env.PORT;
 
+//app.setMaxListeners(40);
 app.listen(PORT, (error) => {
   if (error) {
     return console.log("there is an error on the port " + PORT);

@@ -8,7 +8,7 @@ exports.multer_storage = {
   storage: diskStorage({
     destination: join(rootDir, "uploads"),
     filename: function (req, file, cb) {
-      const generateHash = crypto.randomBytes(10).toString("hex");
+      const generateHash = randomBytes(10).toString("hex");
       const fileName = `${generateHash}-${file.originalname}`;
 
       cb(null, fileName);
