@@ -8,6 +8,7 @@ const flash = require("connect-flash");
 const expressSession = require("express-session");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const { PrismaClient } = require("@prisma/client");
+const paginate = require("express-paginate");
 
 const main_route = require("./routes/main/main_router");
 const admin_route = require("./routes/admin/admin_router");
@@ -46,6 +47,13 @@ app.use(
 
 // flash messages
 app.use(flash());
+
+// express pagination
+app.all(function (req, res, next) {
+  // set default or minimum is 10 (as it was prior to v0.2.0)
+  if (req.query.limit <= 10) req.query.limit = 10;
+  next();
+});
 
 // configurations of the static folders
 app.use(express.static(join(__dirname, "public")));

@@ -18,6 +18,8 @@ exports.getAdminLoginPage = (req, res) => {
     isError: is_error,
     errorMessage: req.flash("error"),
   });
+
+  req.flash("error", null);
 };
 
 /**
@@ -31,18 +33,29 @@ exports.getAdminSignupPage = (req, res) => {
     isError: is_error,
     errorMessage: req.flash("error"),
   });
-  //req.session.message = undefined;
+  req.flash("error", null);
 };
 
 /**
  * THE ADMIN DASHBOARD CONTROLLER
  */
 exports.getAdminDashboardPage = async (req, res) => {
-  res.render("admin/admin-index", {
-    layout: "admin/admin-main.hbs",
-    adminFullname: req.session.credentials.fullname,
-    //donationsDetails: await get_recently_created_donee_profile(), // the recent ref number for people that have donated on paystack
-  });
+  try {
+    res.render("admin/admin-index", {
+      layout: "admin/admin-main.hbs",
+      adminFullname: req.session.credentials.fullname,
+      error: false,
+      //donationsDetails: await get_recently_created_donee_profile(), // the recent ref number for people that have donated on paystack
+    });
+  } catch (error) {
+    console.log(error);
+    res.render("admin/admin-index", {
+      layout: "admin/admin-main.hbs",
+      adminFullname: req.session.credentials.fullname,
+      error: true,
+      //donationsDetails: await get_recently_created_donee_profile(), // the recent ref number for people that have donated on paystack
+    });
+  }
 };
 
 /**
@@ -67,18 +80,17 @@ exports.uploadNewDoneeData = (req, res) => {
   )
     .then((result) => {
       console.log(result);
-      //req.session.message = { info: result };
+      req.flash("info", result);
       return res.redirect("/admin/donation");
     })
     .catch((err) => {
-      //req.session.message = { error: err };
+      req.flash("error", err);
       return res.redirect("/admin/donation");
     });
 };
 
 /**
- * CONTROLLER FOR THE ADMIN TO BE ABLE TO DELETE A PARTICULAR PROBLEM PROFILE
- 
+ * CONTROLLER FOR THE ADMIN TO BE ABLE TO DELETE A PARTICULAR PROBLEM PROFILE 
 exports.search_donee_profile = async (req, res) => {
   console.log(req);
 };*/
