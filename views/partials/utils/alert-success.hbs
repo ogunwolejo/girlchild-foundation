@@ -1,21 +1,19 @@
 <div class="row">
-  {{#if showSuccess}}
-    <!-- alert component -->
-    <div class="col-xl-12 col-lg-12">
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong
-          style="letter-spacing: 3px; word-spacing: 2px; font-size:20px; text-transform: uppercase;"
-          class="offset-lg-4 col-lg-6"
-        >{{success}}!</strong>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        >
-        </button>
-      </div>
-
+  <!-- alert component -->
+  <div class="col-xl-12 col-lg-12">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong
+        style="letter-spacing: 3px; word-spacing: 2px; font-size:20px; text-transform: uppercase;"
+        class="offset-lg-4 col-lg-6"
+      >{{successMessage}}!</strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      >
+      </button>
     </div>
-  {{/if}}
+
+  </div>
 </div>

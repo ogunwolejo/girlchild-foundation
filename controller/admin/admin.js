@@ -9,36 +9,57 @@ const {
 /**
  * THE CONTROLLER SHOWING THE LAYOUT PRESENTATION OF THE LOGIN PAGE ONLY
  */
-exports.getAdminLoginPage = (req, res) => {
-  const is_error = req.flash("error") == null ? false : true;
+exports.getAdminLoginPage = async (req, res) => {
+  const errorArray = req.flash("error");
+  let error = errorArray[0];
+  const isError = error != null ? true : false;
 
-  console.log(2);
+  // info message
+  const infoArray = req.flash("info");
+  let info = infoArray[0];
+  console.log("info message", info);
+  const isInfo = info != null ? true : false;
+
   res.render("admin/admin-login.hbs", {
     layout: "admin/admin-auth.hbs",
-    isError: is_error,
-    errorMessage: req.flash("error"),
+    isError: isError,
+    isInfo: isInfo,
+    errorMessage: error,
+    successMessage: info,
   });
 
   req.flash("error", null);
+  req.flash("info", null);
 };
 
 /**
  * THE CONTROLLER SHOWING THE LAYOUT PRESENTATION OF THE SIGNUP PAGE ONLY
  */
 exports.getAdminSignupPage = (req, res) => {
-  const is_error = req.flash("error") == null ? false : true;
+  // error message
+  const errorArray = req.flash("error");
+  let error = errorArray[0];
+  const isError = error != null ? true : false;
+
+  // info message
+  const infoArray = req.flash("info");
+  let info = infoArray[0];
+  const isInfo = info != null ? true : false;
 
   res.render("admin/admin-signup.hbs", {
     layout: "admin/admin-auth.hbs",
-    isError: is_error,
-    errorMessage: req.flash("error"),
+    isError: isError,
+    isInfo: isInfo,
+    errorMessage: error,
+    successMessage: info,
   });
   req.flash("error", null);
+  req.flash("info", null);
 };
 
 /**
  * THE ADMIN DASHBOARD CONTROLLER
- */
+ 
 exports.getAdminDashboardPage = async (req, res) => {
   try {
     res.render("admin/admin-index", {
@@ -57,6 +78,8 @@ exports.getAdminDashboardPage = async (req, res) => {
     });
   }
 };
+
+*/
 
 /**
  * THE CONTROLLER THAT MAKES THE ADMINSTRATOR TO CREATE AND POST THE PROBLEMS AND PEOPLE THAT ARE IN NEED OF DONATION

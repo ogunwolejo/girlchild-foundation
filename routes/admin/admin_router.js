@@ -24,6 +24,9 @@ const {
   uploadNewDoneeData,
 } = require("../../controller/admin/admin");
 
+//AUTH MODULES
+const { emailAuth } = require("../../controller/auth/emailAuth");
+
 // THE MODULES FROM THE UTILS
 const { authorization } = require("../../utils/middlewares/authorization");
 const {
@@ -44,12 +47,14 @@ const router = express.Router();
 
 // ALL GET REQUEST OPERATIONS
 router.get("/", getAdminLoginPage);
-router.get("/dashboard", authorization, getAdminDashboardPage);
 router.get("/signup", getAdminSignupPage);
 router.get("/donation", getAdminDonationPage);
 router.get("/donee-tables", getAdminDoneeDataTable);
 router.get("/donation-tables", getAdminDonationDataTable);
 router.get("/list", getAdminDonationsList);
+
+// ROUTE FOR ACTIVATING AND CONFIRMING THE EMAIL
+router.get("/activate", emailAuth);
 
 // ALL POST REQUEST OPERATIONS
 router.post("/signup", create_admin);
@@ -60,5 +65,8 @@ router.post("/create-donee-data", upload.single("d-image"), uploadNewDoneeData);
 
 // DELETING A PROBLEM DATA
 //router.post("/delete-donee-data", delete_donee_profile);
+
+
+//router.get("/dashboard", authorization, getAdminDashboardPage);
 
 module.exports = router;

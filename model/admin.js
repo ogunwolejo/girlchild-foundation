@@ -18,6 +18,17 @@ exports.create_admin = async (fullname, email, password) => {
     const admin_count = await prisma.admin.count();
 
     if (admin_count < parseInt(process.env.TOTAL_NUM_ADMIN)) {
+      // checking if the email is registered to an account on my db
+      let doEmailExist = await prisma.admin.findUnique({
+        where: {
+          email: email,
+        },
+      });
+
+      if (doEmailExist) {
+        return Promise.reject("There is an account allocated to this email");
+      }
+
       const created_admin = await prisma.admin.create({
         data: {
           fullname: fullname,
@@ -49,6 +60,7 @@ exports.login_admin = async (email, password) => {
     const _admin = await prisma.admin.findFirst({
       where: {
         email: email,
+        isEmailverify: true,
       },
       select: {
         email: true,
@@ -59,9 +71,9 @@ exports.login_admin = async (email, password) => {
 
     // if there is no admin with such credentials then we throw an error
     if (!_admin) {
-      console.log("There is no user with this credentials".toUpperCase());
+      //console.log("There is no user with this credentials".toUpperCase());
       return Promise.reject(
-        "There is no user with this credentials".toUpperCase()
+        "There is no user with this credentials or this email is not verified".toUpperCase()
       );
     }
 
@@ -73,11 +85,35 @@ exports.login_admin = async (email, password) => {
         email: _admin.email,
       };
     } else {
-      console.log("Incorrect password".toUpperCase());
+      //console.log("Incorrect password".toUpperCase());
       return Promise.reject("Incorrect password".toUpperCase());
     }
   } catch (err) {
     return err;
+  } finally {
+    prisma.$disconnect();
+  }
+};
+
+//FUNCTION FOR EMAIL VERIFICATION
+exports.activateEmail = async (_id) => {
+  try {
+    const user = await prisma.admin.update({
+      where: {
+        id: _id,
+      },
+      data: {
+        isEmailverify: true,
+      },
+    });
+
+    if (!user) {
+      return Promise.reject("No user");
+    }
+    return 1;
+  } catch (error) {
+    console.log(error);
+    return error;
   } finally {
     prisma.$disconnect();
   }

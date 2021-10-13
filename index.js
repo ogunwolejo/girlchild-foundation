@@ -74,6 +74,13 @@ if (process.env.NODE_ENV === "production") {
   app.enable("view cache");
 }
 
+// error page
+/*app.use((req, res, error) => {
+  res.render("pages/404.hbs", {
+    layout: "secondary",
+  });
+});*/
+
 // routes list
 app.use(main_route);
 app.use("/admin", admin_route);
